@@ -1,0 +1,9 @@
+FROM microsoft/dotnet:2.2-sdk
+RUN mkdir /app
+WORKDIR /app
+COPY mvc1.csproj .
+RUN dotnet restore
+COPY . .
+RUN dotnet publish -c Release -o dist
+EXPOSE 80/tcp
+ENTRYPOINT ["dotnet", "dist/mvc1.dll"]
